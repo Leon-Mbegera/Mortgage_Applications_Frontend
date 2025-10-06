@@ -3,7 +3,7 @@ import { isAuthenticated, getUserRole, removeToken } from "../utils/auth";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const isAuthenticated = isAuthenticated();
+  const isAuth = isAuthenticated();
   const role = getUserRole();
 
   const handleLogout = () => {
@@ -18,7 +18,7 @@ const NavBar = () => {
       </div>
       <div>
         {
-          isAuthenticated ? (
+          isAuth ? (
             <>
               {role === 'USER' && <Link to="/user_dashboard" className="mr-4">User Dashboard</Link>}
               {role === 'ADMIN' && <Link to="/admin_dashboard" className="mr-4">Admin Dashboard</Link>}
