@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const apiClient = axios.create(
   {
-    baseUrl: "http://localhost:3000",
+    baseURL: "http://localhost:8080",
     headers: {
       "Content-Type": "application/json"
     }
@@ -22,7 +22,7 @@ export const register = (username, email, password) => {
   apiClient.post("/api/auth/register", { username, email, password })
 }
 
-export const login = (username, password) => {
+export const login = async (username, password) => {
   apiClient.post("/api/auth/login", { username, password})
 }
 
