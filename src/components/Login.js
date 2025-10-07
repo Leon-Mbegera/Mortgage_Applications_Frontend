@@ -18,7 +18,8 @@ const Login = () => {
     try {
       setShowLoader(true);
 
-      const response = await login(username, password)
+      const response = await login(username, password);
+      console.log('login response', response)
 
       setToken(response);
       const role = getUserRole();
@@ -36,7 +37,7 @@ const Login = () => {
   }
 
   const togglePassVisibility = () => {
-    return;
+    setPassVisible(!passVisible);
   }
 
   useEffect(() => {
@@ -50,8 +51,8 @@ const Login = () => {
         <h2 className="text-2xl mb-4">Login</h2>
         {errors.length > 0 && <p className="text-red-500">{errors.join(', ')}</p>}
         <div className="space-y-4">
-          <div className='space-y-2'>
-            <label for='username' className='text-lg font-semibold'>Username</label>
+          <div className='flex flex-col items-start space-y-2'>
+            <label htmlFor='username' className='text-lg font-semibold'>Username</label>
             <input
               id='username'
               type='text'
@@ -60,17 +61,17 @@ const Login = () => {
               className="w-full p-2 border rounded"
             />
           </div>
-          <div className='space-y-2'>
-            <label for='password' className='text-lg font-semibold'>Password</label>
-            <div className='justify-between'>
+          <div className='flex flex-col items-start space-y-2'>
+            <label htmlFor='password' className='text-lg font-semibold'>Password</label>
+            <div className='relative w-full flex justify-between'>
               <input
                 id='password'
-                type='text'
+                type={passVisible ? 'text' : 'password'}
                 placeholder='Enter password'
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full p-2 border rounded"
               />
-              <button type='button' onClick={togglePassVisibility}>
+              <button type='button' className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500" onClick={togglePassVisibility}>
                 {passVisible ? <Eye size={20} /> : <EyeClosed size={20} />}
               </button>
             </div>
